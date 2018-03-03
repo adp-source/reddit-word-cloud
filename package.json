@@ -4,7 +4,8 @@
   "description": "Hello world with express and node.js",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "OSU",
   "license": "ISC",
@@ -16,7 +17,6 @@
     "express-session": "^1.11.3",
     "html-entities": "^1.2.1",
     "mysql": "^2.8.0",
-    "nodemon": "^1.15.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "snoowrap": "^1.15.2",
