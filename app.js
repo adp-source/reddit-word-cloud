@@ -4,31 +4,24 @@ const snoowrap = require('snoowrap');
 const Promise = require('bluebird');
 const parse = require('url-parse')
 const path = require('path');
-const Entities = require('html-entities').AllHtmlEntities;
-const entities = new Entities();
+const credentials = require('./credentials');
 
 const app = express();
 const handlebars = require('express-handlebars').create({defaultLayout:'main'});
 const bodyParser = require('body-parser');
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/public', express.static(path.resolve(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', PORT);
 
-const r = new snoowrap({
-  userAgent: 'Reddit Node App by /u/gummybear991',
-  clientId: 'Rx1ff6veJQZJ0A',
-  clientSecret: '_8L2hSkfoc551gQXYgoAfb2hoSI',
-  username: 'gummybear991',
-  password: 'Something1'
-});
+const r = new snoowrap(credentials.reddit);
 
 // return result is an object, not JSON, can't use JSON.parse
 
@@ -66,7 +59,7 @@ app.post('/',function(req,res){
   let validUrl = true;
   let inputUrl = parse(req.body.reddit);
   let host = inputUrl.hostname.toLowerCase().split('.');
-  let destUrl = inputUrl.pathname.split('/');
+  let destUrl = inputUrl.pathname.toLowerCase().split('/');
 
   if(!host.includes('reddit')){
     validUrl = false;
@@ -76,6 +69,12 @@ app.post('/',function(req,res){
   }
   else if(destUrl.length < 3){
     validUrl = false;
+  }
+
+  if(!validUrl){
+    context.error = "Invalid URL Entered.";
+    res.render('home-error', context);
+    return;
   }
 
   let apiUrl, isComment;
@@ -97,20 +96,19 @@ app.post('/',function(req,res){
     });
   }
   else if(validUrl) {
-    r.getSubreddit(apiUrl).getTop({ time: 'week'}).then(function(result) {
-      context.text = sanitize(result);
-      res.render('home-post', context);
+    r.getSubreddit(apiUrl).fetch().then(function(result) {
+      r.getSubreddit(apiUrl).getTop({ time: 'week'}).then(function(result){
+        context.text = sanitize(result);
+        res.render('home-post', context);        
+      }, function(err){
+        context.error = "Reddit API query failed. URL may be invalid.";
+        res.render('home-error', context);
+      });
     }, function(err) {
       context.error = "Reddit API query failed. URL may be invalid.";
       res.render('home-error', context);
     });
   }
-
-  if(!validUrl){
-    context.error = "Invalid URL Entered.";
-    res.render('home-error', context);
-  }
-
 });
 
 app.get('/resources',function(req,res){
@@ -140,5 +138,5 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(app.get('port'), function(){
-  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
+  console.log('Express started on port ' + app.get('port') + '; press Ctrl-C to terminate.');
 });
