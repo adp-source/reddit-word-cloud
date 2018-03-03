@@ -11,6 +11,8 @@ const app = express();
 const handlebars = require('express-handlebars').create({defaultLayout:'main'});
 const bodyParser = require('body-parser');
 
+const PORT = process.env.PORT || 5000
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -18,7 +20,7 @@ app.use('/public', express.static(path.resolve(__dirname, 'public')));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 3000);
+app.set('port', PORT);
 
 const r = new snoowrap({
   userAgent: 'Reddit Node App by /u/vnlegend',
