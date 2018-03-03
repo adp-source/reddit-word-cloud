@@ -52,7 +52,7 @@ function sanitize(input){
 
 app.get('/',function(req,res){
   let context = {};
-  context.title = "Home";
+  context.title = "Reddit Word Cloud Generator";
   context.home = true;
   res.render('home', context);
 });
@@ -70,7 +70,7 @@ app.post('/',function(req,res){
     isComment = false;
   }
   let context = {};
-  context.title = "Home";
+  context.title = "Reddit Word Cloud Generator";
   context.home = true;
   if(isComment){
     r.getSubmission(apiUrl).fetch().then(function(result){
@@ -90,11 +90,11 @@ app.post('/',function(req,res){
   }
 });
 
-app.get('/info',function(req,res){
+app.get('/resources',function(req,res){
   let context = {};
-  context.title = "Info";
+  context.title = "Resources";
   context.info = true;
-  res.render('info', context);
+  res.render('resources', context);
 });
 
 app.get('/about',function(req,res){

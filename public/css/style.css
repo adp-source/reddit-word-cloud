@@ -58,6 +58,7 @@ legend, h4 {
 .scrollBox {
   overflow: auto;
   height: 200px;
+  margin-bottom: 5px;
 }
 
 .top-spacer {
@@ -79,4 +80,8 @@ legend, h4 {
 
 .centered{
   text-align: center;
+}
+
+#getBtn {
+  margin-top: 5px;
 }

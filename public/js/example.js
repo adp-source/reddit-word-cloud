@@ -8,15 +8,27 @@ document.getElementById('example3-txt').textContent = example2;
 let wc_one = count(example1);
 let wc_two = count(example2);
 let wc_three = count(example3);
-for(i=0; i<8; i++) {
-  console.log(wc_one[i].text);
-}
-for(i=0; i<8; i++) {
-  console.log(wc_two[i].text);
-}
-for(i=0; i<8; i++) {
-  console.log(wc_three[i].text);
-}
+
+document.getElementById('save1').addEventListener('click', function(event){
+  event.preventDefault();
+  let text = document.getElementById('example1-txt').textContent;
+  let blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, "words.txt");
+});
+
+document.getElementById('save2').addEventListener('click', function(event){
+  event.preventDefault();
+  let text = document.getElementById('example2-txt').textContent;
+  let blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, "words.txt");
+});
+
+document.getElementById('save3').addEventListener('click', function(event){
+  event.preventDefault();
+  let text = document.getElementById('example3-txt').textContent;
+  let blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, "words.txt");
+});
 
 d3.wordcloud()
   .selector("#svg1")
