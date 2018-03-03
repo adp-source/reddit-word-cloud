@@ -1,0 +1,82 @@
+@media (min-width: 1200px){
+.container {
+    width: 970px;
+ }
+}
+
+.carousel-indicators li{
+   border: 2px solid black;
+}
+
+.carousel-indicators .active{
+   background-color: orchid;
+}
+
+@media screen and (min-width: 768px){
+   .carousel-indicators {
+       bottom: -25px;
+   }
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.carousel-control{
+   color: black;
+   opacity: 0.5;
+}
+
+.carousel-control:focus, .carousel-control:hover {
+    color: darkorchid;
+}
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+    left: 10%;
+}
+
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+    right: 10%;
+}
+
+.home-bottom {
+   margin-bottom: 30px;
+}
+
+.first-header {
+   margin-top: 0;
+}
+
+.colored-title {
+  color: darkred;
+}
+
+legend, h4 {
+  font-weight: bold;
+}
+
+.scrollBox {
+  overflow: auto;
+  height: 200px;
+}
+
+.top-spacer {
+  margin-top: 30px;
+}
+
+.bot-spacer {
+  margin-bottom: 20px;
+}
+
+.item {
+  height: 500px;
+  overflow: hidden;
+}
+
+.picture{
+  height: 490px;
+}
+
+.centered{
+  text-align: center;
+}

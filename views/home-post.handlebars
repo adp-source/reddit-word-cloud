@@ -1,0 +1,39 @@
+<div class="form-group">
+  <form action="/" method="post">
+     <fieldset>
+     <legend class="colored-title">Query from Reddit</legend>
+     <label for="reddit">Enter subreddit or submission URL: </label>
+     <input type="text" name="reddit" id="reddit" class="form-control" placeholder="https://www.reddit.com/r/nfl/">
+     <input type="submit" id="getBtn" class="btn btn-primary">
+     </fieldset>
+  </form>
+</div>
+
+<div class="text-center">
+  <div id="wordcloud"></div>
+</div>
+
+<div class="home-bottom">
+  <form role="form">
+    <div class="form-group">
+      <h4 class="colored-title">Raw Text</h4>
+      <textarea id="textarea" class="form-control" rows="10"></textarea>
+    </div>
+    <button id="saveBtn" type="submit" class="btn btn-primary">Save to file</button>
+  </form>
+</div>
+
+<script>
+  let wordsData = "";
+  {{#each text}}
+    wordsData += "{{this}} ";
+  {{/each}}
+  wordsData = wordsData.replace(/&#x27;/g, "'");
+</script>
+
+<script type="text/javascript" src="../public/js/d3.js"></script>
+<script type="text/javascript" src="../public/js/d3.layout.cloud.js"></script>
+<script type="text/javascript" src="../public/js/d3.wordcloud.js"></script>
+<script type="text/javascript" src="../public/js/wordcount.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
+<script type="text/javascript" src="../public/js/script.js"></script>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<title>{{title}}</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+   <div class="container">
+      <ul class="nav navbar-nav">
+         {{#if home}}
+            <li id="home" class="active">
+         {{else}}
+            <li id="home">
+         {{/if}}
+         <a href="/">Home</a></li>
+         {{#if info}}
+            <li id="info" class="active">
+         {{else}}
+            <li id="info">
+         {{/if}}
+         <a href="/info">Resources</a></li>
+         {{#if about}}
+            <li id="about" class="active">
+         {{else}}
+            <li id="about">
+         {{/if}}
+         <a href="/about">About</a></li>
+      </ul>
+   </div>
+</nav>
+
+<div class="container">
+   {{{body}}}
+</div>
+</body>
+</html>
