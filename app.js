@@ -23,11 +23,11 @@ app.set('view engine', 'handlebars');
 app.set('port', PORT);
 
 const r = new snoowrap({
-  userAgent: 'Reddit Node App by /u/vnlegend',
-  clientId: 'PZGXhWudIpw4dg',
-  clientSecret: 'pr_bxj6oZJrpRUBDkd2mdXb_5F4',
-  username: 'vnlegend',
-  password: 'iartwind'
+  userAgent: 'Reddit Node App by /u/gummybear991',
+  clientId: 'Rx1ff6veJQZJ0A',
+  clientSecret: '_8L2hSkfoc551gQXYgoAfb2hoSI',
+  username: 'gummybear991',
+  password: 'Something1'
 });
 
 // return result is an object, not JSON, can't use JSON.parse
