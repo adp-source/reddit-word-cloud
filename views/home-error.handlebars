@@ -1,0 +1,18 @@
+<div class="form-group">
+  <form action="/" method="post">
+     <fieldset>
+     <legend class="colored-title">Query from Reddit to Generate a Word Cloud</legend>
+     <label for="reddit">Enter subreddit or submission URL: </label>
+     <input type="url" name="reddit" id="reddit" class="form-control" placeholder="https://www.reddit.com/r/nfl/" required pattern="https?://.+" />
+     <input type="submit" id="getBtn" class="btn btn-primary">
+     </fieldset>
+  </form>
+</div>
+
+<div class="alert alert-danger" role="alert">
+  <h3 class="invalid">{{error}}</h3>
+  <p>Subreddit URLs have a format like this: https://www.reddit.com/r/SubReddit<br/>
+    Submission URLs have a format like this: https://www.reddit.com/r/nfl/comments/81gglg/saquon_barkley_runs_a_441_40/
+  </p>
+  <p>It may help to visit Reddit and copy the URL from there.</p>
+</div>

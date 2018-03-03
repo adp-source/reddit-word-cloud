@@ -85,3 +85,7 @@ legend, h4 {
 #getBtn {
   margin-top: 5px;
 }
+
+h3.invalid{
+  margin-top: 2px;
+}

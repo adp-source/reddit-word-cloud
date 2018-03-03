@@ -58,10 +58,28 @@ app.get('/',function(req,res){
 });
 
 app.post('/',function(req,res){
-  let destUrl = parse(req.body.reddit).pathname.split('/');
-  let apiUrl;
-  let isComment;
-  if(destUrl.includes('comments')){
+  let context = {};
+  context.title = "Reddit Word Cloud Generator";
+  context.error = "";
+  context.home = true;
+
+  let validUrl = true;
+  let inputUrl = parse(req.body.reddit);
+  let host = inputUrl.hostname.toLowerCase().split('.');
+  let destUrl = inputUrl.pathname.split('/');
+
+  if(!host.includes('reddit')){
+    validUrl = false;
+  }
+  else if(!destUrl.includes('r')){
+    validUrl = false;
+  }
+  else if(destUrl.length < 3){
+    validUrl = false;
+  }
+
+  let apiUrl, isComment;
+  if(destUrl.includes('comments') && destUrl.length >= 5){
     apiUrl = destUrl[4];    // get permalink url for submission
     isComment = true;
   }
@@ -69,25 +87,30 @@ app.post('/',function(req,res){
     apiUrl = destUrl[2];    // get subreddit url
     isComment = false;
   }
-  let context = {};
-  context.title = "Reddit Word Cloud Generator";
-  context.home = true;
-  if(isComment){
+  if(isComment && validUrl){
     r.getSubmission(apiUrl).fetch().then(function(result){
       context.text = sanitize(result.comments);
       res.render('home-post', context);
     }, function(err){
-      console.log(err)
+      context.error = "Reddit API query failed. URL may be invalid.";
+      res.render('home-error', context);
     });
   }
-  else {
+  else if(validUrl) {
     r.getSubreddit(apiUrl).getTop({ time: 'week'}).then(function(result) {
       context.text = sanitize(result);
       res.render('home-post', context);
     }, function(err) {
-      console.log(err);
+      context.error = "Reddit API query failed. URL may be invalid.";
+      res.render('home-error', context);
     });
   }
+
+  if(!validUrl){
+    context.error = "Invalid URL Entered.";
+    res.render('home-error', context);
+  }
+
 });
 
 app.get('/resources',function(req,res){

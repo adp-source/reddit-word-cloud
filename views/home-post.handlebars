@@ -1,9 +1,9 @@
 <div class="form-group">
   <form action="/" method="post">
      <fieldset>
-     <legend class="colored-title">Query from Reddit</legend>
+     <legend class="colored-title">Query from Reddit to Generate a Word Cloud</legend>
      <label for="reddit">Enter subreddit or submission URL: </label>
-     <input type="text" name="reddit" id="reddit" class="form-control" placeholder="https://www.reddit.com/r/nfl/">
+     <input type="url" name="reddit" id="reddit" class="form-control" placeholder="https://www.reddit.com/r/nfl/" required pattern="https?://.+" />
      <input type="submit" id="getBtn" class="btn btn-primary">
      </fieldset>
   </form>
